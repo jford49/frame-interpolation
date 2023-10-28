@@ -100,7 +100,10 @@ def _run_interpolator() -> None:
 
 
 def main(argv: Sequence[str]) -> None:
-  print(len(argv), "arguments") 
+  print(len(argv), "arguments")
+  for i in range(len(argv)):
+    print(i, argv[i])
+   
   if len(argv) > 1:
     raise app.UsageError('Too many command-line arguments.')
   _run_interpolator()
