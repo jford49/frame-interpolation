@@ -2,12 +2,9 @@ r"""A test script for mid frame layer generation.
 
 Usage example:
  python3 -m frame_interpolation.eval.interpolator_test \
-   --frame1 <filepath of the first frame> \
-   --frame2 <filepath of the second frame> \
+   --folder_in '<folderpath of the source images>' \
+   --folder_out '<folderpath for mid frame images>' \
    --model_path <The filepath of the TF2 saved model to use>
-
-The output is saved to <the directory of the input frames>/output_frame.png. If
-`--output_frame` filepath is provided, it will be used instead.
 """
 import os
 from os import path, listdir
