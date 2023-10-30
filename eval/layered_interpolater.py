@@ -65,6 +65,11 @@ def _run_interpolator() -> None:
 
   image_path_list = [f for f in listdir(_FOLDER_IN.value) if path.isfile(path.join(_FOLDER_IN.value, f))]
   image_path_list.sort()
+ 
+  photo1_path = path.join(_FOLDER_IN.value, image_path_list[0])
+  image_1 = util.read_image(photo1_path)
+  mid_frame_filepath = path.join(_FOLDER_OUT.value,"img"+f"{0:05d}"+".png")
+  util.write_image(mid_frame_filepath, mid_frame)
 
   idx = 1
   while idx < len(image_path_list):
@@ -79,7 +84,7 @@ def _run_interpolator() -> None:
     # Invoke the model for one mid-frame interpolation.
     mid_frame = interpolator(image_batch_1, image_batch_2, batch_dt)[0]
     
-    mid_frame_filepath = path.join(_FOLDER_OUT.value,"img"+f"{idx-1:05d}"+".png")
+    mid_frame_filepath = path.join(_FOLDER_OUT.value,"img"+f"{idx:05d}"+".png")
     util.write_image(mid_frame_filepath, mid_frame)
     idx+=1
 
