@@ -65,11 +65,12 @@ def _run_interpolator() -> None:
 
   image_path_list = [f for f in listdir(_FOLDER_IN.value) if path.isfile(path.join(_FOLDER_IN.value, f))]
   image_path_list.sort()
- 
+
+  # Preserve the first image so that the input and output frame counts are the same
   photo1_path = path.join(_FOLDER_IN.value, image_path_list[0])
   image_1 = util.read_image(photo1_path)
-  mid_frame_filepath = path.join(_FOLDER_OUT.value,"img"+f"{0:05d}"+".png")
-  util.write_image(mid_frame_filepath, mid_frame)
+  first_frame_filepath = path.join(_FOLDER_OUT.value,"img"+f"{0:05d}"+".png")
+  util.write_image(first_frame_filepath, image_1)
 
   idx = 1
   while idx < len(image_path_list):
