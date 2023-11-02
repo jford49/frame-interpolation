@@ -35,6 +35,15 @@ _FOLDER_OUT = flags.DEFINE_string(
     default=None,
     help='The folder for frame outputs.',
     required=True)
+_FADE_COUNT = flags.DEFINE_integer(
+    name='fade_count',
+    default=0,
+    help='Number of discrete fades over the stream length.',
+    required=True)
+_IMG_IDX = flags.DEFINE_integer(
+    name='img_idx',
+    default=0,
+    help='First title index for output frame.')
 _MODEL_PATH = flags.DEFINE_string(
     name='model_path',
     default=None,
@@ -74,20 +83,38 @@ def _run_interpolator() -> None:
   image_path_list2 = [f for f in listdir(_FOLDER_IN2.value) if path.isfile(path.join(_FOLDER_IN2.value, f))]
   image_path_list2.sort()
 
-  img_idx = 0
+  img_idx = _IMG_IDX.value
 
-  idx = 1
+  mult = float(_FADE_COUNT.value)/float(n_files)
+
+  idx = 0
   while idx < len(image_path_list):
-    photo1_path = path.join(_FOLDER_IN.value, image_path_list[idx-1])
-    photo2_path = path.join(_FOLDER_IN.value, image_path_list[idx])
+    photo1_path = path.join(_FOLDER_IN.value, image_path_list1[idx])
+    photo2_path = path.join(_FOLDER_IN.value, image_path_list2[idx])
     
     image_1 = util.read_image(photo1_path)
     image_batch_1 = np.expand_dims(image_1, axis=0)
     image_2 = util.read_image(photo2_path)
     image_batch_2 = np.expand_dims(image_2, axis=0)
-    
-    # Invoke the model for one mid-frame interpolation.
-    mid_frame = interpolator(image_batch_1, image_batch_2, batch_dt)[0]
+
+    top_idx = _FADE_COUNT.value
+    bot_idx = 0
+    target_fade_idx = int(mult*float(idx))
+
+   while(True):
+     # Invoke the model for one mid-frame interpolation.
+     mid_frame = interpolator(image_batch_1, image_batch_2, batch_dt)[0]
+     current_fade_idx = (top_idx+bot_idx)/2
+     if current_fade_idx == target_fade_idx:
+       break
+     if target_fade_idx < current_fade_idx):
+      image_1 = mid_frame
+      image_batch_1 = np.expand_dims(image_1, axis=0)
+      top_idx = current_fade_idx??????????????
+     elif target_fade_idx > current_fade_idx):
+      image_2 = mid_frame
+      image_batch_2 = np.expand_dims(image_2, axis=0)
+      bot_idx = ??????????????
     
     mid_frame_filepath = path.join(_FOLDER_OUT.value,"img"+f"{img_idx:05d}"+".png")
     util.write_image(mid_frame_filepath, mid_frame)
