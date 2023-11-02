@@ -71,7 +71,7 @@ def _run_interpolator() -> None:
   image_path_list.sort()
 
   img_idx = 0
-  if _LAYER_IDX % 2 == 1:
+  if _LAYER_IDX.value % 2 == 1:
     # Preserve the first image so that the input and output frame counts are the same
     photo1_path = path.join(_FOLDER_IN.value, image_path_list[0])
     image_1 = util.read_image(photo1_path)
@@ -97,7 +97,7 @@ def _run_interpolator() -> None:
     idx+=1
     img_idx+=1
   
-  if _LAYER_IDX % 2 == 0:
+  if _LAYER_IDX.value % 2 == 0:
     # Preserve the last image so that the input and output frame counts are the same
     photo1_path = path.join(_FOLDER_IN.value, image_path_list[len(image_path_list)-1])
     image_1 = util.read_image(photo1_path)
