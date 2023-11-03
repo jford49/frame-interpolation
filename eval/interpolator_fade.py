@@ -116,6 +116,7 @@ def _run_interpolator() -> None:
       # Invoke the model for one mid-frame interpolation.
       mid_frame = interpolator(image_batch_1, image_batch_2, batch_dt)[0]
       current_fade_idx = (top_idx+bot_idx)/2
+      print(top_idx, target_fade_idx, bot_idx)
       if current_fade_idx == target_fade_idx:
         break
       if target_fade_idx < current_fade_idx:
