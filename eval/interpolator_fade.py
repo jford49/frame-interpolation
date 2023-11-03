@@ -99,6 +99,7 @@ def _run_interpolator() -> None:
   frames = list()
   idx = 0
   while idx < n_files:
+    print(idx+1,"/",n_files)
     photo1_path = path.join(_FOLDER_IN1.value, image_path_list1[idx])
     photo2_path = path.join(_FOLDER_IN2.value, image_path_list2[idx])
     
