@@ -99,8 +99,8 @@ def _run_interpolator() -> None:
   frames = list()
   idx = 0
   while idx < n_files:
-    photo1_path = path.join(_FOLDER_IN.value, image_path_list1[idx])
-    photo2_path = path.join(_FOLDER_IN.value, image_path_list2[idx])
+    photo1_path = path.join(_FOLDER_IN1.value, image_path_list1[idx])
+    photo2_path = path.join(_FOLDER_IN2.value, image_path_list2[idx])
     
     image_1 = util.read_image(photo1_path)
     image_batch_1 = np.expand_dims(image_1, axis=0)
