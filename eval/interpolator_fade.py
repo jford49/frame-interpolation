@@ -93,10 +93,10 @@ def _run_interpolator() -> None:
 
   img_idx = _IMG_IDX.value
 
+  n_files = min(len(image_path_list1), len(image_path_list2))
   mult = float(_FADE_COUNT.value)/float(n_files)
 
   frames = List()
-  n_files = min(len(image_path_list1), len(image_path_list2))
   idx = 0
   while idx < n_files:
     photo1_path = path.join(_FOLDER_IN.value, image_path_list1[idx])
