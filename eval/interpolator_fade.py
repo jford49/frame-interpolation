@@ -101,20 +101,20 @@ def _run_interpolator() -> None:
     bot_idx = 0
     target_fade_idx = int(mult*float(idx))
 
-   while(True):
-     # Invoke the model for one mid-frame interpolation.
-     mid_frame = interpolator(image_batch_1, image_batch_2, batch_dt)[0]
-     current_fade_idx = (top_idx+bot_idx)/2
-     if current_fade_idx == target_fade_idx:
-       break
-     if target_fade_idx < current_fade_idx):
-      image_1 = mid_frame
-      image_batch_1 = np.expand_dims(image_1, axis=0)
-      top_idx = current_fade_idx??????????????
-     elif target_fade_idx > current_fade_idx):
-      image_2 = mid_frame
-      image_batch_2 = np.expand_dims(image_2, axis=0)
-      bot_idx = ??????????????
+    while(True):
+      # Invoke the model for one mid-frame interpolation.
+      mid_frame = interpolator(image_batch_1, image_batch_2, batch_dt)[0]
+      current_fade_idx = (top_idx+bot_idx)/2
+      if current_fade_idx == target_fade_idx:
+        break
+      if target_fade_idx < current_fade_idx):
+        image_1 = mid_frame
+        image_batch_1 = np.expand_dims(image_1, axis=0)
+        top_idx = current_fade_idx
+      elif target_fade_idx > current_fade_idx):
+        image_2 = mid_frame
+        image_batch_2 = np.expand_dims(image_2, axis=0)
+        bot_idx = current_fade_idx
     
     mid_frame_filepath = path.join(_FOLDER_OUT.value,"img"+f"{img_idx:05d}"+".png")
     util.write_image(mid_frame_filepath, mid_frame)
