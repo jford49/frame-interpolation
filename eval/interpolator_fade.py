@@ -22,12 +22,12 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 
 
 _FOLDER_IN1 = flags.DEFINE_string(
-    name='folder_in1',
+    name='folder_in2', # Reversed on purpose
     default=None,
     help='The folder with source 1 images.',
     required=True)
 _FOLDER_IN2 = flags.DEFINE_string(
-    name='folder_in2',
+    name='folder_in1', # Reversed on purpose
     default=None,
     help='The folder with source 2 images.',
     required=True)
@@ -120,21 +120,12 @@ def _run_interpolator() -> None:
 
     current_fade_idx = _FADE_COUNT.value/2
     while(True):
-      r'''if current_fade_idx + 1 == target_fade_idx:
-        mid_frame = image_1
-        print("C-", current_fade_idx,", T", target_fade_idx)
-        break
-      elif current_fade_idx - 1 == target_fade_idx:
-        mid_frame = image_2
-        print("C+", current_fade_idx,", T", target_fade_idx)
-        break'''
-       
       # Invoke the model for one mid-frame interpolation.
       mid_frame = interpolator(image_batch_2, image_batch_1, batch_dt)[0]
       current_fade_idx = int((top_idx+bot_idx)/2);
-      print(top_idx, target_fade_idx, bot_idx)
+      #print(top_idx, target_fade_idx, bot_idx)
       if current_fade_idx == target_fade_idx:
-        print("C", current_fade_idx,", T", target_fade_idx)
+        #print("C", current_fade_idx,", T", target_fade_idx)
         break
       if target_fade_idx < current_fade_idx:
         image_1 = mid_frame
