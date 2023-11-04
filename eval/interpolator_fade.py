@@ -94,9 +94,15 @@ def _run_interpolator() -> None:
   img_idx = _IMG_IDX.value
 
   n_files = min(len(image_path_list1), len(image_path_list2))
-  mult = float(_FADE_COUNT.value)/float(n_files)
+  mult = float(_FADE_COUNT.value - 2)/float(n_files - 1)
+  offset = 1
 
   frames = list()
+  if _OUTPUT_VIDEO.value:
+    photo1_path = path.join(_FOLDER_IN1.value, image_path_list1[0])
+    image_1 = util.read_image(photo1_path)
+    frames.append(image_1)
+   
   idx = 0
   while idx < n_files:
     print(idx+1,"/",n_files)
@@ -110,18 +116,18 @@ def _run_interpolator() -> None:
 
     top_idx = _FADE_COUNT.value
     bot_idx = 0
-    target_fade_idx = int(mult*float(idx))
+    target_fade_idx = int(offset + mult * float(idx))
 
-    current_fade_idx = 0
+    current_fade_idx = _FADE_COUNT.value/2
     while(True):
-      if current_fade_idx + 1 == target_fade_idx:
+      r'''if current_fade_idx + 1 == target_fade_idx:
         mid_frame = image_1
         print("C-", current_fade_idx,", T", target_fade_idx)
         break
       elif current_fade_idx - 1 == target_fade_idx:
         mid_frame = image_2
         print("C+", current_fade_idx,", T", target_fade_idx)
-        break
+        break'''
        
       # Invoke the model for one mid-frame interpolation.
       mid_frame = interpolator(image_batch_2, image_batch_1, batch_dt)[0]
@@ -147,6 +153,9 @@ def _run_interpolator() -> None:
       frames.append(mid_frame)
    
   if _OUTPUT_VIDEO.value:
+     photo2_path = path.join(_FOLDER_IN2.value, image_path_list2[n_files-1])
+     image_2 = util.read_image(photo2_path)
+     frames.append(image_2)
      media.write_video(f'{_FOLDER_OUT.value}/interpolated.mp4', frames, fps=30)
      logging.info('Output video saved at %s/interpolated.mp4.', _FOLDER_OUT.value)
   
