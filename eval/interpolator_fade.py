@@ -121,7 +121,7 @@ def _run_interpolator() -> None:
     current_fade_idx = _FADE_COUNT.value/2
     while(True):
       # Invoke the model for one mid-frame interpolation.
-      mid_frame = interpolator(image_batch_2, image_batch_1, batch_dt)[0]
+      mid_frame = interpolator(image_batch_1, image_batch_2, batch_dt)[0]
       current_fade_idx = int((top_idx+bot_idx)/2);
       #print(top_idx, target_fade_idx, bot_idx)
       if current_fade_idx == target_fade_idx:
@@ -148,7 +148,7 @@ def _run_interpolator() -> None:
      image_2 = util.read_image(photo2_path)
      frames.append(image_2)
      media.write_video(f'{_FOLDER_OUT.value}/interpolated.mp4', frames, fps=30)
-     logging.info('Output video saved at %s/interpolated.mp4.', _FOLDER_OUT.value)
+     print(f'Output video saved at {_FOLDER_OUT.value}/interpolated.mp4.')
   
 
 def main(argv: Sequence[str]) -> None:
