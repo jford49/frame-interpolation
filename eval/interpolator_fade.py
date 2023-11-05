@@ -2,8 +2,10 @@ r"""A script for an interpolated fade between streams.
 
 Usage example:
  python3 -m frame_interpolation.eval.interpolator_test \
-   --folder_in '<folderpath of the source images>' \
+   --folder_in1 '<folderpath of the fade from images>' \
+   --folder_in2 '<folderpath of the fade to images>' \
    --folder_out '<folderpath for mid frame images>' \
+   --fade_count <number of fade levels over the length of the folders>
    --model_path <The filepath of the TF2 saved model to use>
 """
 import os
