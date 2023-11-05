@@ -64,7 +64,7 @@ def _run_interpolator() -> None:
   for iLayer in range(_N_LAYERS.value):
     now = datetime.now()
     dt_string = now.strftime("%H:%M:%S")
-    print("\nlayer", str(iLayer+1)+"/"+str_N_LAYERS.value), "start: ", dt_string)
+    print("\nlayer", str(iLayer+1)+"/"+str(_N_LAYERS.value), "start: ", dt_string)
 
     folder_out = path.join(_FOLDER_IN.value, "L"+str(iLayer+1))
     if not path.isdir(folder_out):
