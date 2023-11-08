@@ -88,17 +88,17 @@ def _run_interpolator() -> None:
     media.set_ffmpeg(ffmpeg_path)
 
   image_path_list = [f for f in listdir(_FOLDER_IN.value) if path.isfile(path.join(_FOLDER_IN.value, f))]
-  image_path_list1.sort()
+  image_path_list.sort()
 
   img_idx = _IMG_IDX.value
 
-  n_files = len(image_path_list1)
+  n_files = len(image_path_list)
   mult = float(_FADE_COUNT.value - 2)/float(n_files - 1)
   offset = 1
 
   frames = list()
   if _OUTPUT_VIDEO.value:
-    photo1_path = path.join(_FOLDER_IN.value, image_path_list1[0])
+    photo1_path = path.join(_FOLDER_IN.value, image_path_list[0])
     image_1 = util.read_image(photo1_path)
     frames.append(image_1)
 
