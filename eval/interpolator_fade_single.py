@@ -103,7 +103,7 @@ def _run_interpolator() -> None:
     frames.append(image_1)
 
   image_2 = util.read_image(_IMAGE_FILE.value)
-  image_batch_2 = np.expand_dims(image_fixed, axis=0)
+  image_batch_2 = np.expand_dims(image_2, axis=0)
    
   idx = 0
   while idx < n_files:
@@ -143,8 +143,6 @@ def _run_interpolator() -> None:
       frames.append(mid_frame)
    
   if _OUTPUT_VIDEO.value:
-     photo2_path = path.join(_FOLDER_IN2.value, image_path_list2[n_files-1])
-     image_2 = util.read_image(photo2_path)
      frames.append(image_2)
      media.write_video(f'{_FOLDER_OUT.value}/interpolated.mp4', frames, fps=30)
      print(f'Output video saved at {_FOLDER_OUT.value}/interpolated.mp4.')
