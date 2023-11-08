@@ -23,7 +23,7 @@ import mediapy as media
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 
 
-_FOLDER_IN1 = flags.DEFINE_string(
+_FOLDER_IN = flags.DEFINE_string(
     name='folder_in',
     default=None,
     help='The folder with source stream images.',
@@ -98,7 +98,7 @@ def _run_interpolator() -> None:
 
   frames = list()
   if _OUTPUT_VIDEO.value:
-    photo1_path = path.join(_FOLDER_IN1.value, image_path_list1[0])
+    photo1_path = path.join(_FOLDER_IN.value, image_path_list1[0])
     image_1 = util.read_image(photo1_path)
     frames.append(image_1)
 
