@@ -103,16 +103,16 @@ def _run_interpolator() -> None:
     frames.append(image_1)
 
   print("fixed image:", _IMAGE_FILE.value)
-  image_2 = util.read_image(_IMAGE_FILE.value)
-  image_batch_2 = np.expand_dims(image_2, axis=0)
+  image_1 = util.read_image(_IMAGE_FILE.value)
+  image_batch_1 = np.expand_dims(image_1, axis=0)
    
   idx = 0
   while idx < n_files:
     print(idx+1,"/",n_files)
     
-    photo1_path = path.join(_FOLDER_IN.value, image_path_list[idx]) 
-    image_1 = util.read_image(photo1_path)
-    image_batch_1 = np.expand_dims(image_1, axis=0)
+    photo2_path = path.join(_FOLDER_IN.value, image_path_list[idx]) 
+    image_2 = util.read_image(photo2_path)
+    image_batch_2 = np.expand_dims(image_2, axis=0)
 
     top_idx = _FADE_COUNT.value
     bot_idx = 0
@@ -144,7 +144,7 @@ def _run_interpolator() -> None:
       frames.append(mid_frame)
    
   if _OUTPUT_VIDEO.value:
-     frames.append(image_2)
+     frames.append(image_1)
      media.write_video(f'{_FOLDER_OUT.value}/interpolated.mp4', frames, fps=30)
      print(f'Output video saved at {_FOLDER_OUT.value}/interpolated.mp4.')
   
