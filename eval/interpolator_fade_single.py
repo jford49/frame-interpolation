@@ -102,6 +102,7 @@ def _run_interpolator() -> None:
     image_1 = util.read_image(photo1_path)
     frames.append(image_1)
 
+  print("fixed image:", _IMAGE_FILE.value)
   image_2 = util.read_image(_IMAGE_FILE.value)
   image_batch_2 = np.expand_dims(image_2, axis=0)
    
