@@ -128,12 +128,12 @@ def _run_interpolator() -> None:
         #print("C", current_fade_idx,", T", target_fade_idx)
         break
       if target_fade_idx < current_fade_idx:
-        image_2 = mid_frame
-        image_batch_2 = np.expand_dims(image_2, axis=0)
-        top_idx = current_fade_idx
-      elif target_fade_idx > current_fade_idx:
         image_1 = mid_frame
         image_batch_1 = np.expand_dims(image_1, axis=0)
+        top_idx = current_fade_idx
+      elif target_fade_idx > current_fade_idx:
+        image_2 = mid_frame
+        image_batch_2 = np.expand_dims(image_2, axis=0)
         bot_idx = current_fade_idx
 
     mid_frame_filepath = path.join(_FOLDER_OUT.value,"img"+f"{img_idx:05d}"+".png")
