@@ -110,13 +110,13 @@ def _run_interpolator() -> None:
   while idx < n_files:
     print(idx+1,"/",n_files)
     
-    photo1_path = path.join(_FOLDER_IN.value, image_path_list[idx]) 
+    photo1_path = path.join(_FOLDER_IN.value, image_path_list[n_files - 1 - idx]) 
     image_1 = util.read_image(photo1_path)
     image_batch_1 = np.expand_dims(image_1, axis=0)
 
     top_idx = _FADE_COUNT.value
     bot_idx = 0
-    target_fade_idx = int(offset + mult * float(n_files - 1 - idx))
+    target_fade_idx = int(offset + mult * float(idx))
 
     current_fade_idx = _FADE_COUNT.value/2
     while(True):
