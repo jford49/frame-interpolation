@@ -93,8 +93,9 @@ def _run_interpolator() -> None:
   n_files = len(image_path_list)
   mult = float(_FADE_COUNT.value - 2)/float(n_files - 1)
   offset = 1
- 
-  img_idx = _IMG_IDX.value + n_files
+
+  # Everythong in here is reversed
+  img_idx = _IMG_IDX.value + n_files - 1
 
   frames = list()
   if _OUTPUT_VIDEO.value:
