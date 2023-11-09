@@ -90,11 +90,11 @@ def _run_interpolator() -> None:
   image_path_list = [f for f in listdir(_FOLDER_IN.value) if path.isfile(path.join(_FOLDER_IN.value, f))]
   image_path_list.sort()
 
-  img_idx = _IMG_IDX.value
-
   n_files = len(image_path_list)
   mult = float(_FADE_COUNT.value - 2)/float(n_files - 1)
   offset = 1
+ 
+  img_idx = _IMG_IDX.value + nFiles
 
   frames = list()
   if _OUTPUT_VIDEO.value:
@@ -139,7 +139,7 @@ def _run_interpolator() -> None:
     mid_frame_filepath = path.join(_FOLDER_OUT.value,"img"+f"{img_idx:05d}"+".png")
     util.write_image(mid_frame_filepath, mid_frame)
     idx+=1
-    img_idx+=1
+    img_idx-=1
     if _OUTPUT_VIDEO.value:
       frames.append(mid_frame)
    
