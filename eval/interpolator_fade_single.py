@@ -103,16 +103,16 @@ def _run_interpolator() -> None:
     frames.append(image_1)
 
   print("fixed image:", _IMAGE_FILE.value)
-  image_1 = util.read_image(_IMAGE_FILE.value)
-  image_batch_1 = np.expand_dims(image_1, axis=0)
+  image_2 = util.read_image(_IMAGE_FILE.value)
+  image_batch_2 = np.expand_dims(image_2, axis=0)
    
   idx = 0
   while idx < n_files:
     print(idx+1,"/",n_files)
     
-    photo2_path = path.join(_FOLDER_IN.value, image_path_list[idx]) 
-    image_2 = util.read_image(photo2_path)
-    image_batch_2 = np.expand_dims(image_2, axis=0)
+    photo1_path = path.join(_FOLDER_IN.value, image_path_list[idx]) 
+    image_1 = util.read_image(photo1_path)
+    image_batch_1 = np.expand_dims(image_1, axis=0)
 
     top_idx = _FADE_COUNT.value
     bot_idx = 0
@@ -130,11 +130,11 @@ def _run_interpolator() -> None:
       if target_fade_idx < current_fade_idx:
         image_1 = mid_frame
         image_batch_1 = np.expand_dims(image_1, axis=0)
-        top_idx = current_fade_idx
+        bot_idx = current_fade_idx
       elif target_fade_idx > current_fade_idx:
         image_2 = mid_frame
         image_batch_2 = np.expand_dims(image_2, axis=0)
-        bot_idx = current_fade_idx
+        top_idx = current_fade_idx
 
     mid_frame_filepath = path.join(_FOLDER_OUT.value,"img"+f"{img_idx:05d}"+".png")
     util.write_image(mid_frame_filepath, mid_frame)
@@ -144,7 +144,7 @@ def _run_interpolator() -> None:
       frames.append(mid_frame)
    
   if _OUTPUT_VIDEO.value:
-     frames.append(image_1)
+     frames.append(image_2)
      media.write_video(f'{_FOLDER_OUT.value}/interpolated.mp4', frames, fps=30)
      print(f'Output video saved at {_FOLDER_OUT.value}/interpolated.mp4.')
   
