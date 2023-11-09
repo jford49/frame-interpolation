@@ -116,7 +116,7 @@ def _run_interpolator() -> None:
 
     top_idx = _FADE_COUNT.value
     bot_idx = 0
-    target_fade_idx = int(offset + mult * float(idx))
+    target_fade_idx = int(offset + mult * float(n_files - 1 - idx))
 
     current_fade_idx = _FADE_COUNT.value/2
     while(True):
