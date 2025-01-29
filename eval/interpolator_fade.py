@@ -96,6 +96,7 @@ def _run_interpolator() -> None:
 
   img_idx = _IMG_IDX.value
 
+  print("len 1 =", len(image_path_list1),", len 2 =", len(image_path_list2))
   n_files = min(len(image_path_list1), len(image_path_list2))
   mult = float(_FADE_COUNT.value - 2)/float(n_files - 1)
   offset = 1
