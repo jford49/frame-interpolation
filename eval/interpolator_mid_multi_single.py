@@ -1,3 +1,4 @@
+r"""A script for an interpolated fade between a stream and a single image.
 Usage example:
  python3 -m frame_interpolation.eval.interpolator_test \
    --folder_in '<folderpath of the fade from images>' \
